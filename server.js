@@ -16,7 +16,7 @@ const teamLeadRatio = ['1-5', '1-7', '1-10', '1-12']
 const pmSalary = [3500, 3600, 3700]
 app.use(express.json())
 if(process.env.NODE_ENV === 'production'){
-    app.use(express.static(path.join(__dirname, "simulationClient/build")))
+    app.use(express.static(path.join(__dirname, "")))
 }
 app.post('/sign', async(req,res) => {
     try {

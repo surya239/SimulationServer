@@ -9,8 +9,7 @@
   },
 
   "scripts": {
-    "start": "nodemon server.js",
-    "heroku-postbuild": "cd ./simulationClient && npm install && npm run build"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",

@@ -2,8 +2,8 @@ const pool = require('./db')
 const express = require('express')
 const app = express()
 const cors = require('cors')
-
-
+const path = require('path')
+require('dotenv').config()
 const PORT = 5000
 app.use(cors())
 let L = ['100-0', '80-20', '70-30', '50-50', '30-70', '20-80'];
@@ -15,7 +15,9 @@ const projectDuration = 5
 const teamLeadRatio = ['1-5', '1-7', '1-10', '1-12']
 const pmSalary = [3500, 3600, 3700]
 app.use(express.json())
-
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static(path.join(__dirname, "simulationClient/build")))
+}
 app.post('/sign', async(req,res) => {
     try {
         const {username, email, password} = req.body
@@ -28,6 +30,13 @@ app.post('/sign', async(req,res) => {
     }
 })
 
+app.get('/hi', async(req, res) => {
+    try {
+        res.json(pmSalary)
+    } catch (error) {
+        
+    }
+})
 //WBS
 app.post('/wbs', async(req,res) => {
     try {
@@ -690,7 +699,9 @@ app.get('/summary', async(req, res) => {
         console.log(error)
     }
 })
-
+// app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname,"simulationClient/build/index.html"))
+// })
 app.listen(PORT, () =>{
     console.log("App Listening in ", PORT)
 })
